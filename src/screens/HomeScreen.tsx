@@ -15,7 +15,7 @@ export default function HomeScreen({ navigation }: any) {
 
       <Button
         title="Adicionar tarefa"
-        onPress={() => navigation.navigate('NovaTarefa')}
+        onPress={() => navigation.navigate('NewTask')}
       />
 
       <FlatList
