@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
+import { styles } from "./styles"
 
 export default function App() {
   return (
@@ -10,21 +11,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f2f4f7',
-  },
-  titulo: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#ff9500',
-    marginBottom: 4,
-  },
-  subtitulo: {
-    fontSize: 14,
-    color: '#777',
-  },
-});
