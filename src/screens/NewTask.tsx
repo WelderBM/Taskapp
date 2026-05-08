@@ -1,8 +1,43 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const STORAGE_KEY = '@taskapp:tarefas';
 
 export default function NewTask({ navigation }: any) {
   const [titulo, setTitulo] = useState('');
+
+  const salvarNovaTarefa = async () => {
+    if (titulo.trim() === '') {
+      Alert.alert('Atenção', 'Digite o título da tarefa.');
+      return;
+    }
+
+    try {
+      const dadosSalvos = await AsyncStorage.getItem(STORAGE_KEY);
+
+      const tarefas = dadosSalvos ? JSON.parse(dadosSalvos) : [];
+
+      const novaTarefa = {
+        id: Date.now().toString(),
+        titulo: titulo,
+      };
+
+      const tarefasAtualizadas = [...tarefas, novaTarefa];
+
+      await AsyncStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(tarefasAtualizadas)
+      );
+
+      setTitulo('');
+
+      navigation.navigate('HomeScreen');
+    } catch (error) {
+      console.log('Erro ao salvar nova tarefa:', error);
+      Alert.alert('Erro', 'Não foi possível salvar a tarefa.');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -15,7 +50,7 @@ export default function NewTask({ navigation }: any) {
         onChangeText={setTitulo}
       />
 
-      <Button title="Salvar tarefa" onPress={() => navigation.navigate('Home')} />
+      <Button title="Salvar tarefa" onPress={salvarNovaTarefa} />
     </View>
   );
 }
