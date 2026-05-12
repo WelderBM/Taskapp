@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './src/screens/HomeScreen';
 import NewTask from './src/screens/NewTask';
+import ItemScreen from './src/screens/ItemScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,11 @@ export default function App() {
           name="NewTask"
           component={NewTask}
           options={{ title: 'Nova Tarefa' }}
+        />
+        <Stack.Screen
+          name="ItemScreen"
+          component={ItemScreen}
+          options={{ title: 'Tela do Item' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
