@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { styles } from "./styles";
 
 type TaskItemProps = {
   titulo: string;
@@ -8,6 +8,7 @@ type TaskItemProps = {
   onConcluir: () => void;
   onExcluir: () => void;
   onEditar: () => void;
+  goToSpecification: () => void;
 };
 
 export default function TaskItem({
@@ -16,9 +17,10 @@ export default function TaskItem({
   onConcluir,
   onExcluir,
   onEditar,
+  goToSpecification,
 }: TaskItemProps) {
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={goToSpecification}>
       <Text style={[styles.itemText, concluida && styles.concluida]}>
         {titulo}
       </Text>
@@ -28,12 +30,15 @@ export default function TaskItem({
           <Text style={styles.btnText}>Editar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={[styles.btnComum, concluida ? styles.btnDesfazer : styles.btnConcluir]} 
+        <TouchableOpacity
+          style={[
+            styles.btnComum,
+            concluida ? styles.btnDesfazer : styles.btnConcluir,
+          ]}
           onPress={onConcluir}
         >
           <Text style={styles.btnText}>
-            {concluida ? 'Desfazer' : 'Concluir'}
+            {concluida ? "Desfazer" : "Concluir"}
           </Text>
         </TouchableOpacity>
 
@@ -41,6 +46,6 @@ export default function TaskItem({
           <Text style={styles.btnText}>Excluir</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }

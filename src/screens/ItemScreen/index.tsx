@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { styles } from "./styles";
 
 const STORAGE_KEY = "@taskapp:tarefas";
@@ -8,9 +7,9 @@ const STORAGE_KEY = "@taskapp:tarefas";
 export default function NewTask({ route, navigation }: any) {
   const tarefa = route.params?.tarefa;
 
-  const titulo = tarefa.titulo
-  const descricao = tarefa.descricao
-  const tag = tarefa.tag
+  useEffect(()=> {
+    
+  }, [])
 
   return (
     <View style={styles.container}>

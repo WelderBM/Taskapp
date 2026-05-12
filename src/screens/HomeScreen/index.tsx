@@ -10,6 +10,8 @@ const STORAGE_KEY = '@taskapp:tarefas';
 export type Tarefa = {
   id: string;
   titulo: string;
+  descricao?: string;
+  tag?: string;
   concluida: boolean;
 };
 
@@ -60,6 +62,10 @@ export default function HomeScreen({ navigation }: any) {
     navigation.navigate('NewTask', { tarefa });
   };
 
+  const goToSpecification = (tarefa: Tarefa) => {
+    navigation.navigate('ItemScreen', { tarefa });
+  };
+
   useFocusEffect(
     useCallback(() => {
       carregarTarefas();
@@ -86,6 +92,7 @@ export default function HomeScreen({ navigation }: any) {
             onConcluir={() => concluirTarefa(item.id)}
             onExcluir={() => excluirTarefa(item.id)}
             onEditar={() => editarTarefa(item)}
+            goToSpecification={() => goToSpecification(item)}
           />
         )}
         keyExtractor={(item) => item.id}
